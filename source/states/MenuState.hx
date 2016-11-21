@@ -1,4 +1,4 @@
-package;
+package states;
 
 import flixel.FlxG;
 import flixel.FlxSprite;
@@ -12,8 +12,7 @@ class MenuState extends FlxState
 {
 	override public function create():Void
 	{
-		FlxG.mouse.useSystemCursor = true;
-		FlxG.mouse.visible = true;
+		add(new FlxSprite("assets/images/placeholder_menu_bg.png"));
 		
 		add(new FlxButton(120, 200, "New Game", clickNewGame));
 		add(new FlxButton(120, 240, "Load Game", clickLoadGame));
@@ -30,7 +29,12 @@ class MenuState extends FlxState
 
 	private function clickNewGame():Void
 	{
-		FlxG.switchState(new PlayState());
+		// TODO - substate to get player settings
+		
+		var m = new MapState();
+		m.Player = new Player("New Player");
+		
+		FlxG.switchState(m);
 	}
 	
 	private function clickLoadGame():Void

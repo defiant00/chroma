@@ -1,4 +1,4 @@
-package;
+package states;
 
 import flixel.FlxG;
 import flixel.FlxSprite;
@@ -6,15 +6,14 @@ import flixel.FlxState;
 import flixel.text.FlxText;
 import flixel.ui.FlxButton;
 import flixel.math.FlxMath;
+import flixel.util.FlxColor;
 
-class PlayState extends FlxState
+class LevelState extends FlxState
 {
 	private var _hilights: Array<Array<FlxSprite>>;
 
 	override public function create():Void
 	{
-		//FlxG.mouse.visible = false;
-
 		_hilights = new Array();
 
 		for (x in 0...16)
@@ -23,7 +22,7 @@ class PlayState extends FlxState
 			_hilights.push(xa);
 			for (y in 0...16)
 			{
-				var s = new FlxSprite(x * 64, y * 64, "assets/images/hilight.png");
+				var s = new FlxSprite(x * 32, y * 32, "assets/images/placeholder_hilight.png");
 				s.visible = false;
 				xa.push(s);
 				add(s);
@@ -44,10 +43,8 @@ class PlayState extends FlxState
 	{
 		if (FlxG.mouse.justPressed)
 		{
-			var x = Std.int(FlxG.mouse.screenX / 64);
-			var y = Std.int(FlxG.mouse.screenY / 64);
-
-			trace(x + ", " + y);
+			var x = FlxG.mouse.screenX >> 5;
+			var y = FlxG.mouse.screenY >> 5;
 
 			if (x > -1 && x < 16 && y > -1 && y < 16)
 			{
