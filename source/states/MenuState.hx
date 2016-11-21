@@ -1,5 +1,6 @@
 package states;
 
+import data.*;
 import flixel.FlxG;
 import flixel.FlxSprite;
 import flixel.FlxState;
@@ -10,6 +11,8 @@ import flash.system.System;
 
 class MenuState extends FlxState
 {
+	public var game:GameData;
+	
 	override public function create():Void
 	{
 		add(new FlxSprite("assets/images/placeholder_menu_bg.png"));
@@ -27,27 +30,28 @@ class MenuState extends FlxState
 		super.update(elapsed);
 	}
 
-	private function clickNewGame():Void
+	function clickNewGame():Void
 	{
 		// TODO - substate to get player settings
 		
-		var m = new MapState();
-		m.Player = new Player("New Player");
+		game.status = new StatusData();
 		
+		var m = new MapState();
+		m.game = game;
 		FlxG.switchState(m);
 	}
 	
-	private function clickLoadGame():Void
+	function clickLoadGame():Void
 	{
 		
 	}
 	
-	private function clickSettings():Void
+	function clickSettings():Void
 	{
 		
 	}
 	
-	private function clickQuit():Void
+	function clickQuit():Void
 	{
 		System.exit(0);
 	}

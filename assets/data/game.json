@@ -1,0 +1,10 @@
+{
+	"missions": [
+		{"id": 1, "name": "first", "description": "this is your\nfirst mission!", "location": {"x": 200, "y": 300},
+			"levels": [
+				{"maxDays": 7, "mapCode": "1a"},
+				{"mapCode": "1b"}
+			]
+		}
+	]
+}

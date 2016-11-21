@@ -1,5 +1,6 @@
 package states;
 
+import data.*;
 import flixel.FlxG;
 import flixel.FlxSprite;
 import flixel.FlxState;
@@ -10,7 +11,9 @@ import flixel.util.FlxColor;
 
 class LevelState extends FlxState
 {
-	private var _hilights: Array<Array<FlxSprite>>;
+	public var game:GameData;
+	
+	var _hilights:Array<Array<FlxSprite>>;
 
 	override public function create():Void
 	{
@@ -22,7 +25,8 @@ class LevelState extends FlxState
 			_hilights.push(xa);
 			for (y in 0...16)
 			{
-				var s = new FlxSprite(x * 32, y * 32, "assets/images/placeholder_hilight.png");
+				var s = new FlxSprite(x * 32, y * 32);
+				s.loadGraphic("assets/images/placeholder_tiles.png", true, 32, 32);
 				s.visible = false;
 				xa.push(s);
 				add(s);
@@ -39,7 +43,7 @@ class LevelState extends FlxState
 		super.update(elapsed);
 	}
 
-	private function doMouse():Void
+	function doMouse():Void
 	{
 		if (FlxG.mouse.justPressed)
 		{
