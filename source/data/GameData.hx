@@ -1,12 +1,12 @@
 package data;
 
-class GameData 
+class GameData
 {
 	public var status:StatusData;
 	public var missions:Array<MissionData>;
 
-	public function new() 
+	public function new()
 	{
-		status = new StatusData();
+		missions = new Array<MissionData>();
 	}
 }

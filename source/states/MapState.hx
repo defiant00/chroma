@@ -51,7 +51,7 @@ class MapState extends FlxState
 	
 	function overButton(mission:MissionData):Void
 	{
-		_flag.setPosition(mission.location.x, mission.location.y);
+		_flag.setPosition(mission.locX, mission.locY);
 		_flag.visible = true;
 	}
 	

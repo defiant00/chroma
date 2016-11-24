@@ -1,9 +1,14 @@
 {
 	"missions": [
-		{"id": 1, "name": "first", "description": "this is your\nfirst mission!", "location": {"x": 200, "y": 300},
+		{"id": 1, "name": "first", "description": "this is your\nfirst mission!", "locX": 200, "locY": 300,
 			"levels": [
-				{"maxDays": 7, "mapCode": "1a"},
-				{"mapCode": "1b"}
+				{"minDays": 0, "mapCode": "1a"},
+				{"minDays": 7, "mapCode": "1b"}
+			]
+		},
+		{"id": 2, "name": "second", "description": "this is another mission", "locX": 320, "locY": 400,
+			"levels": [
+				{"minDays": 0, "mapCode": "2a"}
 			]
 		}
 	]

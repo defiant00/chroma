@@ -14,6 +14,8 @@ class LevelState extends FlxState
 	public var game:GameData;
 	
 	var _hilights:Array<Array<FlxSprite>>;
+	var xDim = 100;
+	var yDim = 100;
 
 	override public function create():Void
 	{
@@ -55,5 +57,53 @@ class LevelState extends FlxState
 				_hilights[x][y].visible = !_hilights[x][y].visible;
 			}
 		}
+	}
+	
+	function calculatePathingMap(xLoc:Int, yLoc:Int, val:Int):Array<Array<Int>>
+	{
+		var status = new Array<Array<Int>>();
+		
+		for (x in 0...xDim)
+		{
+			var inner = new Array<Int>();
+			status.push(inner);
+			for (y in 0...yDim)
+			{
+				inner.push(0);
+			}
+		}
+		
+		var items = new List<PathingItem>();
+		items.add(new PathingItem(xLoc, yLoc, val));
+		
+		while (items.length > 0)
+		{
+			var item = items.pop();
+			
+			if (item.x > -1 && item.y > -1 && item.x < xDim && item.y < yDim && status[item.x][item.y] < item.val)
+			{
+				status[item.x][item.y] = item.val;
+				items.add(new PathingItem(item.x - 1, item.y, item.val - 1));
+				items.add(new PathingItem(item.x + 1, item.y, item.val - 1));
+				items.add(new PathingItem(item.x, item.y - 1, item.val - 1));
+				items.add(new PathingItem(item.x, item.y + 1, item.val - 1));
+			}
+		}
+		
+		return status;
+	}
+}
+
+class PathingItem
+{
+	public var x:Int;
+	public var y:Int;
+	public var val:Int;
+	
+	public function new(x:Int, y:Int, val:Int)
+	{
+		this.x = x;
+		this.y = y;
+		this.val = val;
 	}
 }
