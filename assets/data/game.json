@@ -2,13 +2,32 @@
 	"missions": [
 		{"id": 1, "name": "first", "description": "this is your\nfirst mission!", "locX": 200, "locY": 300,
 			"levels": [
-				{"minDays": 0, "mapCode": "1a"},
-				{"minDays": 7, "mapCode": "1b"}
+				{"minDays": 0, "xDim": 8, "yDim": 8, "base": [
+					[0, 0, 0, 0, 0, 0, 0, 0],
+					[0, 1, 0, 1, 0, 1, 0, 1],
+					[0, 1, 0, 1, 0, 1, 0, 1],
+					[1, 1, 1, 1, 1, 1, 1, 1],
+					[0, 1, 0, 1, 0, 1, 0, 1],
+					[0, 1, 0, 1, 0, 1, 0, 1],
+					[0, 1, 0, 1, 0, 1, 0, 1],
+					[1, 1, 1, 1, 1, 1, 1, 1]
+				], "extras": [
+					{"id": 0, "x": 70, "y": 75}
+				]},
+				{"minDays": 7, "xDim": 1, "yDim": 1, "base": [
+					[0]
+				], "extras": [
+					{"id": 0, "x": 64, "y": 45}
+				]}
 			]
 		},
 		{"id": 2, "name": "second", "description": "this is another mission", "locX": 320, "locY": 400,
 			"levels": [
-				{"minDays": 0, "mapCode": "2a"}
+				{"minDays": 0, "xDim": 1, "yDim": 1, "base": [
+					[0]
+				], "extras": [
+					{"id": 0, "x": 64, "y": 45}
+				]}
 			]
 		}
 	]

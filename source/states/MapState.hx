@@ -4,6 +4,8 @@ import data.*;
 import flixel.FlxG;
 import flixel.FlxState;
 import flixel.FlxSprite;
+import flixel.graphics.frames.FlxFramesCollection;
+import flixel.math.FlxRect;
 import flixel.ui.FlxButton;
 import openfl.display.Tilesheet;
 
@@ -27,9 +29,10 @@ class MapState extends FlxState
 			y += 40;
 		}
 		
-		_flag = new FlxSprite();
-		_flag.loadGraphic("assets/images/placeholder_tiles.png", true, 32, 32);
-		_flag.animation.frameIndex = 1;
+		_flag = new FlxSprite("assets/images/placeholder_tiles.png");
+		var f = new FlxFramesCollection(_flag.graphic);
+		f.addSpriteSheetFrame(new FlxRect(32, 0, 32, 32));
+		_flag.setFrames(f);
 		
 		_flag.visible = false;
 		add(_flag);

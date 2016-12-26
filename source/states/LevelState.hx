@@ -4,6 +4,8 @@ import data.*;
 import flixel.FlxG;
 import flixel.FlxSprite;
 import flixel.FlxState;
+import flixel.graphics.frames.FlxFramesCollection;
+import flixel.math.FlxRect;
 import flixel.text.FlxText;
 import flixel.ui.FlxButton;
 import flixel.math.FlxMath;
@@ -13,28 +15,69 @@ class LevelState extends FlxState
 {
 	public var game:GameData;
 	
-	var _hilights:Array<Array<FlxSprite>>;
-	var xDim = 100;
-	var yDim = 100;
+	var xDim:Int;
+	var yDim:Int;
+	
+	var tileMapSize = 2048;
+	var smallTileSize = 32;
+	var bigTileSize = 64;
+	var numSmallTileRows = 4;
+	var numSmallTilesPerRow:Int;
+	var numBigTilesPerRow:Int;
+	var numBigTileRows = 30;
+	var bigTileOffset:Int;
 
+	public function new()
+	{
+		numSmallTilesPerRow = Std.int(tileMapSize / smallTileSize);
+		numBigTilesPerRow = Std.int(tileMapSize / bigTileSize);
+		bigTileOffset = numSmallTilesPerRow * numSmallTileRows;
+		super();
+	}
+	
 	override public function create():Void
 	{
-		_hilights = new Array();
-
-		for (x in 0...16)
+		var tiles = new FlxSprite("assets/images/placeholder_tiles.png");
+		var f = new FlxFramesCollection(tiles.graphic);
+		
+		for (r in 0...numSmallTileRows)
 		{
-			var xa = new Array();
-			_hilights.push(xa);
-			for (y in 0...16)
+			for (t in 0...numSmallTilesPerRow)
+			{
+				f.addSpriteSheetFrame(new FlxRect(t * smallTileSize, r * smallTileSize, smallTileSize, smallTileSize));
+			}
+		}
+		for (r in 2...numBigTileRows)
+		{
+			for (t in 0...numBigTilesPerRow)
+			{
+				f.addSpriteSheetFrame(new FlxRect(t * bigTileSize, r * bigTileSize, bigTileSize, bigTileSize));
+			}
+		}
+		
+		tiles.setFrames(f);
+		
+		// TODO - Get the actual mission...
+		var lvl = game.missions[0].levels[0];
+		for (y in 0...lvl.base.length)
+		{
+			for (x in 0...lvl.base[y].length)
 			{
 				var s = new FlxSprite(x * 32, y * 32);
-				s.loadGraphic("assets/images/placeholder_tiles.png", true, 32, 32);
-				s.visible = false;
-				xa.push(s);
+				s.loadGraphicFromSprite(tiles);
+				s.animation.frameIndex = lvl.base[y][x] + numSmallTilesPerRow;
 				add(s);
 			}
 		}
-
+		
+		for (e in lvl.extras)
+		{
+			var s = new FlxSprite(e.x, e.y);
+			s.loadGraphicFromSprite(tiles);
+			s.animation.frameIndex = e.id + bigTileOffset;
+			add(s);
+		}
+		
 		super.create();
 	}
 
@@ -51,11 +94,6 @@ class LevelState extends FlxState
 		{
 			var x = FlxG.mouse.screenX >> 5;
 			var y = FlxG.mouse.screenY >> 5;
-
-			if (x > -1 && x < 16 && y > -1 && y < 16)
-			{
-				_hilights[x][y].visible = !_hilights[x][y].visible;
-			}
 		}
 	}
 	
@@ -91,19 +129,5 @@ class LevelState extends FlxState
 		}
 		
 		return status;
-	}
-}
-
-class PathingItem
-{
-	public var x:Int;
-	public var y:Int;
-	public var val:Int;
-	
-	public function new(x:Int, y:Int, val:Int)
-	{
-		this.x = x;
-		this.y = y;
-		this.val = val;
 	}
 }

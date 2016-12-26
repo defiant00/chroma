@@ -54,7 +54,12 @@ class SplashState extends FlxState
 			var lArr:Array<Dynamic> = mission.levels;
 			for (level in lArr)
 			{
-				var l = new LevelData(level.minDays, level.mapCode);
+				var l = new LevelData(level.minDays, level.xDim, level.yDim, level.base);
+				var eArr:Array<Dynamic> = level.extras;
+				for (extra in eArr)
+				{
+					l.extras.push(new ExtraItem(extra.id, extra.x, extra.y));
+				}
 				m.levels.push(l);
 			}
 			_game.missions.push(m);
