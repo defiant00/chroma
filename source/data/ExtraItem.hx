@@ -2,13 +2,13 @@ package data;
 
 class ExtraItem
 {
-	public var id:Int;
+	public var name:String;
 	public var x:Int;
 	public var y:Int;
 	
-	public function new(id:Int, x:Int, y:Int)
+	public function new(name:String, x:Int, y:Int)
 	{
-		this.id = id;
+		this.name = name;
 		this.x = x;
 		this.y = y;
 	}

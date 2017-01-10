@@ -4,8 +4,6 @@ import data.*;
 import flixel.FlxG;
 import flixel.FlxSprite;
 import flixel.FlxState;
-import flixel.graphics.frames.FlxFramesCollection;
-import flixel.math.FlxRect;
 import flixel.text.FlxText;
 import flixel.ui.FlxButton;
 import flixel.math.FlxMath;
@@ -18,54 +16,19 @@ class LevelState extends FlxState
 	var xDim:Int;
 	var yDim:Int;
 	
-	var tileMapSize = 2048;
-	var smallTileSize = 32;
-	var bigTileSize = 64;
-	var numSmallTileRows = 4;
-	var numSmallTilesPerRow:Int;
-	var numBigTilesPerRow:Int;
-	var numBigTileRows = 30;
-	var bigTileOffset:Int;
-
-	public function new()
-	{
-		numSmallTilesPerRow = Std.int(tileMapSize / smallTileSize);
-		numBigTilesPerRow = Std.int(tileMapSize / bigTileSize);
-		bigTileOffset = numSmallTilesPerRow * numSmallTileRows;
-		super();
-	}
-	
 	override public function create():Void
 	{
-		var tiles = new FlxSprite("assets/images/placeholder_tiles.png");
-		var f = new FlxFramesCollection(tiles.graphic);
-		
-		for (r in 0...numSmallTileRows)
-		{
-			for (t in 0...numSmallTilesPerRow)
-			{
-				f.addSpriteSheetFrame(new FlxRect(t * smallTileSize, r * smallTileSize, smallTileSize, smallTileSize));
-			}
-		}
-		for (r in 2...numBigTileRows)
-		{
-			for (t in 0...numBigTilesPerRow)
-			{
-				f.addSpriteSheetFrame(new FlxRect(t * bigTileSize, r * bigTileSize, bigTileSize, bigTileSize));
-			}
-		}
-		
-		tiles.setFrames(f);
+		var tiles = TileLoader.GetBaseTileSprite(game);
 		
 		// TODO - Get the actual mission...
 		var lvl = game.missions[0].levels[0];
-		for (y in 0...lvl.base.length)
+		for (x in 0...lvl.xDim)
 		{
-			for (x in 0...lvl.base[y].length)
+			for (y in 0...lvl.yDim)
 			{
 				var s = new FlxSprite(x * 32, y * 32);
 				s.loadGraphicFromSprite(tiles);
-				s.animation.frameIndex = lvl.base[y][x] + numSmallTilesPerRow;
+				s.animation.play(lvl.tiles[x][y]);
 				add(s);
 			}
 		}
@@ -74,7 +37,7 @@ class LevelState extends FlxState
 		{
 			var s = new FlxSprite(e.x, e.y);
 			s.loadGraphicFromSprite(tiles);
-			s.animation.frameIndex = e.id + bigTileOffset;
+			s.animation.play(e.name);
 			add(s);
 		}
 		

@@ -1,32 +1,27 @@
 {
+	"animations": [
+		{"name": "flag", "indices": [1], "flipY": true},
+		{"name": "testAnim", "indices": [0, 1], "frameRate": 5, "looped": true, "flipX": true, "flipY": true},
+		{"name": "pt0", "indices": [2]},
+		{"name": "pt1", "indices": [3]},
+		{"name": "tree0", "indices": [512], "flipY": true}
+	],
+	"tiles": [
+		{"name": "pt0", "land": false, "air": false},
+		{"name": "pt1", "land": true, "air": false}
+	],
 	"missions": [
 		{"id": 1, "name": "first", "description": "this is your\nfirst mission!", "locX": 200, "locY": 300,
 			"levels": [
-				{"minDays": 0, "xDim": 8, "yDim": 8, "base": [
-					[0, 0, 0, 0, 0, 0, 0, 0],
-					[0, 1, 0, 1, 0, 1, 0, 1],
-					[0, 1, 0, 1, 0, 1, 0, 1],
-					[1, 1, 1, 1, 1, 1, 1, 1],
-					[0, 1, 0, 1, 0, 1, 0, 1],
-					[0, 1, 0, 1, 0, 1, 0, 1],
-					[0, 1, 0, 1, 0, 1, 0, 1],
-					[1, 1, 1, 1, 1, 1, 1, 1]
+				{"minDays": 0, "xDim": 8, "yDim": 6, "tiles": [
+					["testAnim", "testAnim", "testAnim", "testAnim", "pt0", "pt0", "pt0", "pt0"],
+					["pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0"],
+					["pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0"],
+					["pt1", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0"],
+					["pt1", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0"],
+					["pt1", "pt1", "pt1", "pt1", "pt1", "pt1", "pt1", "pt1"]
 				], "extras": [
-					{"id": 0, "x": 70, "y": 75}
-				]},
-				{"minDays": 7, "xDim": 1, "yDim": 1, "base": [
-					[0]
-				], "extras": [
-					{"id": 0, "x": 64, "y": 45}
-				]}
-			]
-		},
-		{"id": 2, "name": "second", "description": "this is another mission", "locX": 320, "locY": 400,
-			"levels": [
-				{"minDays": 0, "xDim": 1, "yDim": 1, "base": [
-					[0]
-				], "extras": [
-					{"id": 0, "x": 64, "y": 45}
+					{"name": "tree0", "x": 70, "y": 75}
 				]}
 			]
 		}

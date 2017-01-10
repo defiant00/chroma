@@ -29,10 +29,8 @@ class MapState extends FlxState
 			y += 40;
 		}
 		
-		_flag = new FlxSprite("assets/images/placeholder_tiles.png");
-		var f = new FlxFramesCollection(_flag.graphic);
-		f.addSpriteSheetFrame(new FlxRect(32, 0, 32, 32));
-		_flag.setFrames(f);
+		_flag = TileLoader.GetBaseTileSprite(game);
+		_flag.animation.play("flag");
 		
 		_flag.visible = false;
 		add(_flag);
