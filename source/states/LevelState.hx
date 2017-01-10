@@ -28,7 +28,7 @@ class LevelState extends FlxState
 			{
 				var s = new FlxSprite(x * 32, y * 32);
 				s.loadGraphicFromSprite(tiles);
-				s.animation.play(lvl.tiles[x][y]);
+				s.animation.play(lvl.tiles[x][y], -1);
 				add(s);
 			}
 		}
@@ -37,7 +37,7 @@ class LevelState extends FlxState
 		{
 			var s = new FlxSprite(e.x, e.y);
 			s.loadGraphicFromSprite(tiles);
-			s.animation.play(e.name);
+			s.animation.play(e.name, -1);
 			add(s);
 		}
 		
