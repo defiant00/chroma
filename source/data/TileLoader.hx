@@ -5,7 +5,7 @@ import flixel.math.FlxRect;
 
 class TileLoader 
 {
-	public static function GetBaseTileSprite(gameData:GameData):FlxSprite
+	public static function GetBaseTileSprite(stat:StaticData):FlxSprite
 	{		
 		var tileMapSize = 2048;
 		var smallTileSize = 32;
@@ -36,7 +36,7 @@ class TileLoader
 		
 		tiles.setFrames(f);
 		
-		for (anim in gameData.animations)
+		for (anim in stat.animations)
 		{
 			tiles.animation.add(anim.name, anim.indices, anim.frameRate, anim.looped, anim.flipX, anim.flipY);
 		}

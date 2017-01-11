@@ -5,18 +5,21 @@ class LevelData
 	public var minDays:Int;
 	public var xDim:Int;
 	public var yDim:Int;
-	public var tiles:Array<Array<String>>;
-	public var extras:Array<ExtraItem>;
-	public var flips:Array<Array<Int>>;
+	public var tiles:Array<Tile>;
+	public var doodads:Array<Doodad>;
 
-	public function new(minDays:Int, xDim:Int, yDim:Int, tiles:Array<Array<String>>, flips:Array<Array<Int>>)
+	public function new(minDays:Int, xDim:Int, yDim:Int)
 	{
 		this.minDays = minDays;
 		this.xDim = xDim;
 		this.yDim = yDim;
-		this.tiles = tiles;
-		this.extras = new Array<ExtraItem>();
-		this.flips = flips;
+		this.tiles = new Array<Tile>();
+		this.doodads = new Array<Doodad>();
+	}
+	
+	public inline function getTile(x:Int, y:Int):Tile
+	{
+		return tiles[x + y * xDim];
 	}
 }
 

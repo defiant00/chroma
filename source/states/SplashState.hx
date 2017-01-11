@@ -11,7 +11,7 @@ import sys.io.File;
 class SplashState extends FlxState
 {
 	var _totalTime:Float;
-	var _game:GameData;
+	var _state:State;
 
 	override public function create():Void
 	{
@@ -36,7 +36,7 @@ class SplashState extends FlxState
 		if (_totalTime > 3 || FlxG.mouse.justPressed || FlxG.keys.anyJustPressed([ESCAPE, SPACE, ENTER]))
 		{
 			var m = new MenuState();
-			m.game = _game;
+			m.state = _state;
 			FlxG.switchState(m);
 		}
 
@@ -45,7 +45,9 @@ class SplashState extends FlxState
 
 	function loadGameData():Void
 	{
-		_game = new GameData();
+		_state = new State();
+		var stat = new StaticData();
+		_state.staticData = stat;
 		var g = Json.parse(File.getContent("assets/data/game.json"));
 		
 		// Animations
@@ -53,14 +55,7 @@ class SplashState extends FlxState
 		for (animation in aArr)
 		{
 			var a = new Animation(animation.name, animation.indices, animation.frameRate, animation.looped, animation.flipX, animation.flipY);
-			_game.animations.push(a);
-		}
-		
-		// Tileblocks
-		var tArr:Array<Dynamic> = g.tileblocks;
-		for (tile in tArr)
-		{
-			_game.tileblock[tile.name] = tile.block;
+			stat.animations.push(a);
 		}
 		
 		// Missions
@@ -71,30 +66,23 @@ class SplashState extends FlxState
 			var lArr:Array<Dynamic> = mission.levels;
 			for (level in lArr)
 			{
-				var tiles:Array<Array<String>> = level.tiles;
+				var l = new LevelData(level.minDays, level.xDim, level.yDim);
 				
-				// [y][x] makes the array readable in json, flip them here so we can use [x][y] in the rest of the code
-				var reordered = new Array<Array<String>>();
-				for (x in 0...level.xDim)
+				var tArr:Array<Dynamic> = level.tiles;
+				for (tile in tArr)
 				{
-					reordered.push(new Array<String>());
-					for (y in 0...level.yDim)
-					{
-						reordered[x].push(tiles[y][x]); 
-					}
+					l.tiles.push(new Tile(tile.name, tile.block, tile.blockAir));
 				}
 				
-				var l = new LevelData(level.minDays, level.xDim, level.yDim, reordered, level.flips);
-				
-				var eArr:Array<Dynamic> = level.extras;
-				for (extra in eArr)
+				var dArr:Array<Dynamic> = level.doodads;
+				for (doodad in dArr)
 				{
-					l.extras.push(new ExtraItem(extra.name, extra.x, extra.y, extra.z));
+					l.doodads.push(new Doodad(doodad.name, doodad.x, doodad.y, doodad.z));
 				}
 				
 				m.levels.push(l);
 			}
-			_game.missions.push(m);
+			stat.missions.push(m);
 		}
 	}
 }

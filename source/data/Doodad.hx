@@ -1,6 +1,6 @@
 package data;
 
-class ExtraItem
+class Doodad
 {
 	public var name:String;
 	public var x:Int;

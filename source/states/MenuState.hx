@@ -11,7 +11,7 @@ import flash.system.System;
 
 class MenuState extends FlxState
 {
-	public var game:GameData;
+	public var state:State;
 	
 	override public function create():Void
 	{
@@ -34,10 +34,10 @@ class MenuState extends FlxState
 	{
 		// TODO - substate to get player settings
 		
-		game.status = new StatusData("name");
+		state.currentData = new CurrentData("name");
 		
 		var m = new MapState();
-		m.game = game;
+		m.state = state;
 		FlxG.switchState(m);
 	}
 	

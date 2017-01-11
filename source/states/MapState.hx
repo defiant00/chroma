@@ -11,7 +11,7 @@ import openfl.display.Tilesheet;
 
 class MapState extends FlxState
 {
-	public var game:GameData;
+	public var state:State;
 	
 	var _flag:FlxSprite;
 
@@ -20,7 +20,7 @@ class MapState extends FlxState
 		add(new FlxSprite("assets/images/placeholder_map_bg.png"));
 		
 		var y = 200;
-		for (m in game.missions)
+		for (m in state.staticData.missions)
 		{
 			var b = new FlxButton(800, y, m.name, selectMission.bind(m));
 			b.onOver.callback = overButton.bind(m);
@@ -29,7 +29,7 @@ class MapState extends FlxState
 			y += 40;
 		}
 		
-		_flag = TileLoader.GetBaseTileSprite(game);
+		_flag = TileLoader.GetBaseTileSprite(state.staticData);
 		_flag.animation.play("flag");
 		
 		_flag.visible = false;
@@ -45,9 +45,24 @@ class MapState extends FlxState
 	
 	function selectMission(mission:MissionData):Void
 	{
-		var l = new LevelState();
-		l.game = game;
-		FlxG.switchState(l);
+		#if debug
+			if (FlxG.keys.pressed.E)
+			{
+				var e = new EditorState();
+				e.state = state;
+				FlxG.switchState(e);
+			}
+			else
+			{
+				var l = new LevelState();
+				l.state = state;
+				FlxG.switchState(l);
+			}
+		#else
+			var l = new LevelState();
+			l.state = state;
+			FlxG.switchState(l);
+		#end
 	}
 	
 	function overButton(mission:MissionData):Void

@@ -10,99 +10,59 @@ import flixel.util.FlxSort;
 
 class LevelState extends FlxState
 {
-	public var game:GameData;
+	public var state:State;
 	var tiles:FlxTypedGroup<FlxSprite>;
 	var characters:FlxTypedGroup<FlxSprite>;
-	var extras:Array<FlxTypedGroup<FlxSprite>>;
+	var belowDoodads:FlxTypedGroup<ZSprite>;
+	var aboveDoodads:FlxTypedGroup<ZSprite>;
 	
 	var level:LevelData;
-	var collisionMap:Array<Array<Bool>>;
 	
 	override public function create():Void
 	{
 		// TODO - Get the actual mission...
-		level = game.missions[0].levels[0];
-		calculateCollisionMap();
+		level = state.staticData.missions[0].levels[0];
 		
 		add(tiles = new FlxTypedGroup<FlxSprite>());
-		var t = TileLoader.GetBaseTileSprite(game);
+		add(belowDoodads = new FlxTypedGroup<ZSprite>());
+		add(characters = new FlxTypedGroup<FlxSprite>());
+		add(aboveDoodads = new FlxTypedGroup<ZSprite>());
+		
+		var baseTile = TileLoader.GetBaseTileSprite(state.staticData);
 		
 		for (x in 0...level.xDim)
 		{
 			for (y in 0...level.yDim)
 			{
 				var s = new FlxSprite(x * 32, y * 32);
-				s.loadGraphicFromSprite(t);
-				s.animation.play(level.tiles[x][y], -1);
+				s.loadGraphicFromSprite(baseTile);
+				s.animation.play(level.getTile(x, y).name, -1);
 				tiles.add(s);
 			}
 		}
 		
-		var maxZ = -1;
-		for (e in level.extras)
+		for (d in level.doodads)
 		{
-			if (maxZ < e.z)
-			{
-				maxZ = e.z;
-			}
+			var s = new ZSprite(d.x, d.y, d.z);
+			s.loadGraphicFromSprite(baseTile);
+			s.animation.play(d.name, -1);
+			(d.z < 0 ? belowDoodads : aboveDoodads).add(s);
 		}
 		
-		if (maxZ > -1)
-		{
-			extras = new Array<FlxTypedGroup<FlxSprite>>();
-			for (i in 0...(maxZ + 1))
-			{
-				extras.push(new FlxTypedGroup<FlxSprite>());
-			}
-			
-			for (e in level.extras)
-			{
-				var s = new FlxSprite(e.x, e.y);
-				s.loadGraphicFromSprite(t);
-				s.animation.play(e.name, -1);
-				extras[e.z].add(s);
-			}
-			
-			extras[0].sort(FlxSort.byY);
-			add(extras[0]);
-		}
-		add(characters = new FlxTypedGroup<FlxSprite>());
-		for (i in 1...(maxZ + 1))
-		{
-			extras[i].sort(FlxSort.byY);
-			add(extras[i]);
-		}
-		
-		// Display collision map (debug purposes only)
-		if (true)
-		{
-			for (x in 0...level.xDim)
-			{
-				for (y in 0...level.yDim)
-				{
-					if (collisionMap[x][y])
-					{
-						var s = new FlxSprite(x * 32, y * 32);
-						s.loadGraphicFromSprite(t);
-						s.color = FlxColor.RED;
-						s.animation.play("hash");
-						add(s);
-					}
-				}
-			}
-		}
+		belowDoodads.sort(ZSprite.sortByZ);
+		aboveDoodads.sort(ZSprite.sortByZ);
 		
 		super.create();
 	}
 
 	override public function update(elapsed:Float):Void
 	{
-		doMouse();
+		doInput();
 
 		super.update(elapsed);
 	}
 
-	function doMouse():Void
+	function doInput():Void
 	{
 		if (FlxG.mouse.justPressed)
 		{
@@ -110,43 +70,25 @@ class LevelState extends FlxState
 			var y = FlxG.mouse.y >> 5;
 		}
 		
-		var scrollArea = 100;
+		var scrollArea = 64;
 		var fixedX = FlxG.mouse.x + FlxG.camera.x;
 		var fixedY = FlxG.mouse.y + FlxG.camera.y;
 		
-		if (FlxG.keys.pressed.UP || fixedY < scrollArea)
+		if (FlxG.keys.pressed.UP || FlxG.keys.pressed.W || fixedY < scrollArea)
 		{
-			FlxG.camera.y += game.status.scrollRate;
+			FlxG.camera.y += state.currentData.scrollRate;
 		}
-		if (FlxG.keys.pressed.DOWN || (fixedY > 720 - scrollArea))
+		if (FlxG.keys.pressed.DOWN || FlxG.keys.pressed.S || (fixedY > 720 - scrollArea))
 		{
-			FlxG.camera.y -= game.status.scrollRate;
+			FlxG.camera.y -= state.currentData.scrollRate;
 		}
-		if (FlxG.keys.pressed.LEFT || fixedX < scrollArea)
+		if (FlxG.keys.pressed.LEFT || FlxG.keys.pressed.A || fixedX < scrollArea)
 		{
-			FlxG.camera.x += game.status.scrollRate;
+			FlxG.camera.x += state.currentData.scrollRate;
 		}
-		if (FlxG.keys.pressed.RIGHT || (fixedX > 1280 - scrollArea))
+		if (FlxG.keys.pressed.RIGHT || FlxG.keys.pressed.D || (fixedX > 1280 - scrollArea))
 		{
-			FlxG.camera.x -= game.status.scrollRate;
-		}
-	}
-	
-	function calculateCollisionMap():Void
-	{
-		collisionMap = new Array<Array<Bool>>();
-		for (x in 0...level.xDim)
-		{
-			collisionMap.push(new Array<Bool>());
-			for (y in 0...level.yDim)
-			{
-				collisionMap[x].push(game.tileblock[level.tiles[x][y]]);
-			}
-		}
-		
-		for (f in level.flips)
-		{
-			collisionMap[f[0]][f[1]] = !collisionMap[f[0]][f[1]];
+			FlxG.camera.x -= state.currentData.scrollRate;
 		}
 	}
 	
