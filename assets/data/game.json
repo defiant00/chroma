@@ -13,13 +13,23 @@
 	"missions": [
 		{"id": 1, "name": "first", "description": "this is your\nfirst mission!", "locX": 200, "locY": 300,
 			"levels": [
-				{"minDays": 0, "xDim": 8, "yDim": 6, "tiles": [
-					["testAnim", "testAnim", "testAnim", "testAnim", "pt0", "pt0", "pt0", "pt0"],
-					["pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0"],
-					["pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0"],
-					["pt1", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0"],
-					["pt1", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0"],
-					["pt1", "pt1", "pt1", "pt1", "pt1", "pt1", "pt1", "pt1"]
+				{"minDays": 0, "xDim": 32, "yDim": 16, "tiles": [
+					["testAnim", "testAnim", "testAnim", "testAnim", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0"],
+					["testAnim", "testAnim", "testAnim", "testAnim", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0"],
+					["testAnim", "testAnim", "testAnim", "testAnim", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0"],
+					["testAnim", "testAnim", "testAnim", "testAnim", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0"],
+					["pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0"],
+					["pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0"],
+					["pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0"],
+					["pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0"],
+					["pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0"],
+					["pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0"],
+					["pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0"],
+					["pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0"],
+					["pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0"],
+					["pt1", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0"],
+					["pt1", "pt0", "pt0", "pt0", "pt0", "pt1", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0"],
+					["pt1", "pt1", "pt1", "pt1", "pt1", "pt0", "pt1", "pt1", "pt0", "pt1", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0"]
 				], "extras": [
 					{"name": "tree0", "x": 70, "y": 75}
 				]}
