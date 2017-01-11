@@ -4,41 +4,92 @@ import data.*;
 import flixel.FlxG;
 import flixel.FlxSprite;
 import flixel.FlxState;
-import flixel.text.FlxText;
-import flixel.ui.FlxButton;
-import flixel.math.FlxMath;
+import flixel.group.FlxGroup.FlxTypedGroup;
 import flixel.util.FlxColor;
+import flixel.util.FlxSort;
 
 class LevelState extends FlxState
 {
 	public var game:GameData;
+	var tiles:FlxTypedGroup<FlxSprite>;
+	var characters:FlxTypedGroup<FlxSprite>;
+	var extras:Array<FlxTypedGroup<FlxSprite>>;
 	
-	var xDim:Int;
-	var yDim:Int;
+	var level:LevelData;
+	var collisionMap:Array<Array<Bool>>;
 	
 	override public function create():Void
 	{
-		var tiles = TileLoader.GetBaseTileSprite(game);
-		
 		// TODO - Get the actual mission...
-		var lvl = game.missions[0].levels[0];
-		for (x in 0...lvl.xDim)
+		level = game.missions[0].levels[0];
+		calculateCollisionMap();
+		
+		add(tiles = new FlxTypedGroup<FlxSprite>());
+		var t = TileLoader.GetBaseTileSprite(game);
+		
+		for (x in 0...level.xDim)
 		{
-			for (y in 0...lvl.yDim)
+			for (y in 0...level.yDim)
 			{
 				var s = new FlxSprite(x * 32, y * 32);
-				s.loadGraphicFromSprite(tiles);
-				s.animation.play(lvl.tiles[x][y], -1);
-				add(s);
+				s.loadGraphicFromSprite(t);
+				s.animation.play(level.tiles[x][y], -1);
+				tiles.add(s);
 			}
 		}
 		
-		for (e in lvl.extras)
+		var maxZ = -1;
+		for (e in level.extras)
 		{
-			var s = new FlxSprite(e.x, e.y);
-			s.loadGraphicFromSprite(tiles);
-			s.animation.play(e.name, -1);
-			add(s);
+			if (maxZ < e.z)
+			{
+				maxZ = e.z;
+			}
+		}
+		
+		if (maxZ > -1)
+		{
+			extras = new Array<FlxTypedGroup<FlxSprite>>();
+			for (i in 0...(maxZ + 1))
+			{
+				extras.push(new FlxTypedGroup<FlxSprite>());
+			}
+			
+			for (e in level.extras)
+			{
+				var s = new FlxSprite(e.x, e.y);
+				s.loadGraphicFromSprite(t);
+				s.animation.play(e.name, -1);
+				extras[e.z].add(s);
+			}
+			
+			extras[0].sort(FlxSort.byY);
+			add(extras[0]);
+		}
+		add(characters = new FlxTypedGroup<FlxSprite>());
+		for (i in 1...(maxZ + 1))
+		{
+			extras[i].sort(FlxSort.byY);
+			add(extras[i]);
+		}
+		
+		// Display collision map (debug purposes only)
+		if (true)
+		{
+			for (x in 0...level.xDim)
+			{
+				for (y in 0...level.yDim)
+				{
+					if (collisionMap[x][y])
+					{
+						var s = new FlxSprite(x * 32, y * 32);
+						s.loadGraphicFromSprite(t);
+						s.color = FlxColor.RED;
+						s.animation.play("hash");
+						add(s);
+					}
+				}
+			}
 		}
 		
 		super.create();
@@ -60,15 +111,33 @@ class LevelState extends FlxState
 		}
 	}
 	
+	function calculateCollisionMap():Void
+	{
+		collisionMap = new Array<Array<Bool>>();
+		for (x in 0...level.xDim)
+		{
+			collisionMap.push(new Array<Bool>());
+			for (y in 0...level.yDim)
+			{
+				collisionMap[x].push(game.tileblock[level.tiles[x][y]]);
+			}
+		}
+		
+		for (f in level.flips)
+		{
+			collisionMap[f[0]][f[1]] = !collisionMap[f[0]][f[1]];
+		}
+	}
+	
 	function calculatePathingMap(xLoc:Int, yLoc:Int, val:Int):Array<Array<Int>>
 	{
 		var status = new Array<Array<Int>>();
 		
-		for (x in 0...xDim)
+		for (x in 0...level.xDim)
 		{
 			var inner = new Array<Int>();
 			status.push(inner);
-			for (y in 0...yDim)
+			for (y in 0...level.yDim)
 			{
 				inner.push(0);
 			}
@@ -81,7 +150,7 @@ class LevelState extends FlxState
 		{
 			var item = items.pop();
 			
-			if (item.x > -1 && item.y > -1 && item.x < xDim && item.y < yDim && status[item.x][item.y] < item.val)
+			if (item.x > -1 && item.y > -1 && item.x < level.xDim && item.y < level.yDim && status[item.x][item.y] < item.val)
 			{
 				status[item.x][item.y] = item.val;
 				items.add(new PathingItem(item.x - 1, item.y, item.val - 1));

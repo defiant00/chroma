@@ -56,12 +56,11 @@ class SplashState extends FlxState
 			_game.animations.push(a);
 		}
 		
-		// Tiles
-		var tArr:Array<Dynamic> = g.tiles;
+		// Tileblocks
+		var tArr:Array<Dynamic> = g.tileblocks;
 		for (tile in tArr)
 		{
-			var t = new Tile(tile.name, tile.land, tile.air);
-			_game.tiles.push(t);
+			_game.tileblock[tile.name] = tile.block;
 		}
 		
 		// Missions
@@ -85,12 +84,12 @@ class SplashState extends FlxState
 					}
 				}
 				
-				var l = new LevelData(level.minDays, level.xDim, level.yDim, reordered);
+				var l = new LevelData(level.minDays, level.xDim, level.yDim, reordered, level.flips);
 				
 				var eArr:Array<Dynamic> = level.extras;
 				for (extra in eArr)
 				{
-					l.extras.push(new ExtraItem(extra.name, extra.x, extra.y));
+					l.extras.push(new ExtraItem(extra.name, extra.x, extra.y, extra.z));
 				}
 				
 				m.levels.push(l);

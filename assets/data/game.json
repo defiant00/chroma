@@ -1,23 +1,23 @@
 {
 	"animations": [
-		{"name": "flag", "indices": [1], "flipY": true},
-		{"name": "testAnim", "indices": [0, 1], "frameRate": 5, "looped": true, "flipX": true, "flipY": true},
+		{"name": "hash", "indices": [0]},
+		{"name": "flag", "indices": [1]},
 		{"name": "pt0", "indices": [2]},
 		{"name": "pt1", "indices": [3]},
-		{"name": "tree0", "indices": [512], "flipY": true}
+		{"name": "pe0", "indices": [512]}
 	],
-	"tiles": [
-		{"name": "pt0", "land": false, "air": false},
-		{"name": "pt1", "land": true, "air": false}
+	"tileblocks": [
+		{"name": "pt0", "block": false},
+		{"name": "pt1", "block": true}
 	],
 	"missions": [
 		{"id": 1, "name": "first", "description": "this is your\nfirst mission!", "locX": 200, "locY": 300,
 			"levels": [
 				{"minDays": 0, "xDim": 32, "yDim": 16, "tiles": [
-					["testAnim", "testAnim", "testAnim", "testAnim", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0"],
-					["testAnim", "testAnim", "testAnim", "testAnim", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0"],
-					["testAnim", "testAnim", "testAnim", "testAnim", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0"],
-					["testAnim", "testAnim", "testAnim", "testAnim", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0"],
+					["pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0"],
+					["pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0"],
+					["pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0"],
+					["pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0"],
 					["pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0"],
 					["pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0"],
 					["pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0"],
@@ -31,7 +31,12 @@
 					["pt1", "pt0", "pt0", "pt0", "pt0", "pt1", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0"],
 					["pt1", "pt1", "pt1", "pt1", "pt1", "pt0", "pt1", "pt1", "pt0", "pt1", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0", "pt0"]
 				], "extras": [
-					{"name": "tree0", "x": 70, "y": 75}
+					{"name": "pe0", "x": 70, "y": 75, "z": 4},
+					{"name": "pe0", "x": 120, "y": 60, "z": 4}
+				], "flips": [
+					[2, 2], [3, 2], [4, 2], [5, 2],
+					[2, 3], [3, 3], [4, 3], [5, 3],
+					[2, 4], [3, 4]
 				]}
 			]
 		}
