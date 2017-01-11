@@ -106,8 +106,29 @@ class LevelState extends FlxState
 	{
 		if (FlxG.mouse.justPressed)
 		{
-			var x = FlxG.mouse.screenX >> 5;
-			var y = FlxG.mouse.screenY >> 5;
+			var x = FlxG.mouse.x >> 5;
+			var y = FlxG.mouse.y >> 5;
+		}
+		
+		var scrollArea = 100;
+		var fixedX = FlxG.mouse.x + FlxG.camera.x;
+		var fixedY = FlxG.mouse.y + FlxG.camera.y;
+		
+		if (FlxG.keys.pressed.UP || fixedY < scrollArea)
+		{
+			FlxG.camera.y += game.status.scrollRate;
+		}
+		if (FlxG.keys.pressed.DOWN || (fixedY > 720 - scrollArea))
+		{
+			FlxG.camera.y -= game.status.scrollRate;
+		}
+		if (FlxG.keys.pressed.LEFT || fixedX < scrollArea)
+		{
+			FlxG.camera.x += game.status.scrollRate;
+		}
+		if (FlxG.keys.pressed.RIGHT || (fixedX > 1280 - scrollArea))
+		{
+			FlxG.camera.x -= game.status.scrollRate;
 		}
 	}
 	
