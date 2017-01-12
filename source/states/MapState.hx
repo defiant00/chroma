@@ -45,24 +45,9 @@ class MapState extends FlxState
 	
 	function selectMission(mission:MissionData):Void
 	{
-		#if debug
-			if (FlxG.keys.pressed.E)
-			{
-				var e = new EditorState();
-				e.state = state;
-				FlxG.switchState(e);
-			}
-			else
-			{
-				var l = new LevelState();
-				l.state = state;
-				FlxG.switchState(l);
-			}
-		#else
-			var l = new LevelState();
-			l.state = state;
-			FlxG.switchState(l);
-		#end
+		var l = new LevelState();
+		l.state = state;
+		FlxG.switchState(l);
 	}
 	
 	function overButton(mission:MissionData):Void
